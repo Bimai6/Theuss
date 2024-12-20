@@ -31,7 +31,7 @@ header svg{
 }
 
 .header_border_bottom_unfixed{
-    background-color: black;
+    background-color: #444444;
     width: 100%;
     height: 0.2rem;
     position: relative;
@@ -39,7 +39,6 @@ header svg{
 }
 
 #theuss_cb{
-    margin-left: -6rem;
     position: relative;
     z-index: 10;
 }
@@ -47,4 +46,5 @@ header svg{
 #theuss_logo{
     position: relative;
     z-index: 100;
+    transform: translateX(-41vw);
 }
