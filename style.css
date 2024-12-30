@@ -1,9 +1,14 @@
 body{
+    background-color: #ffffff;
     padding: 0;
     margin: 0;
     display: flex;
     box-sizing: border-box;
     flex-wrap: wrap;
+    font-family: "Merriweather", serif;
+    font-weight: 300;
+    font-style: normal;
+    color: #444444;
 }
 
 header{
@@ -13,11 +18,6 @@ header{
     gap: 1.5rem;
     position: fixed;
     justify-content: space-between;
-    align-items: center;
-}
-
-header img {
-    max-height: 5vh;
 }
 
 header svg{
@@ -27,7 +27,7 @@ header svg{
 .header_right_options{
     display: flex;
     gap: 1.5rem;
-    margin-right: 2em;
+    margin-right: 2.5em;
 }
 
 .header_border_bottom_unfixed{
@@ -35,7 +35,7 @@ header svg{
     width: 100%;
     height: 0.2rem;
     position: relative;
-    top: 9vh;
+    top: 10vh;
 }
 
 #theuss_cb{
@@ -47,4 +47,29 @@ header svg{
     position: relative;
     z-index: 100;
     transform: translateX(-41vw);
+}
+
+main{
+    display: flex;
+    position: fixed;
+    padding: 1rem;
+    top: 12vh;
+    width: 100%;
+    justify-content: center;
+}
+
+#add_new_task_input{
+    display: flex;
+    border: 2px dashed #444444;
+    padding: 2px;
+    width: calc(75% - 1.5rem);
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    font-size: 25px;
+    gap: 1em;
+}
+
+#add_btn{
+    max-height: 7vh;
 }
