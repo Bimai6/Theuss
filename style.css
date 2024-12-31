@@ -24,7 +24,7 @@ header{
     justify-content: space-between;
 }
 
-header svg{
+header svg{ 
     max-height: 5vh;
 }
 
@@ -35,7 +35,7 @@ header svg{
     
 }
 
-header svg:hover{
+#palette_icon,#search_icon:hover{
     cursor: pointer;
 }
 
@@ -66,9 +66,14 @@ main{
     justify-content: center;
 }
 
-main:hover{
+#add_new_task_input:hover{
     filter: brightness(1.5);
     cursor: pointer;
+}
+
+#add_new_task_input.no-hover:hover{
+    filter: none;
+    cursor: default;
 }
 
 #add_new_task_input{
@@ -81,9 +86,10 @@ main:hover{
     align-items: center;
     font-size: 25px;
     gap: 1em;
+    min-height: 14vh;
 }
 
-#add_btn{
+#add_btn, #task_confirmed, #task_canceled{
     max-height: 7vh;
 }
 
