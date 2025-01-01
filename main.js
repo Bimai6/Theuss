@@ -18,8 +18,8 @@ function handleClick() {
 
   taskAddContainer.classList.add("no-hover");
   taskAddContainer.innerHTML = `
-    <input type="text" name="task_name" id="task_name" placeholder="Buy a carrot">
-    <input type="date" name="task_date" id="task_date">
+    <input type="text" name="task_name" id="task_name" placeholder="Buy a carrot" required>
+    <input type="date" name="task_date" id="task_date" required>
     <svg id="task_confirmed" width="37px" height="37px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
       <path d="m16 0c8.836556 0 16 7.163444 16 16s-7.163444 16-16 16-16-7.163444-16-16 7.163444-16 16-16zm5.7279221 11-7.0710679 7.0710678-4.2426406-4.2426407-1.4142136 1.4142136 5.6568542 5.6568542 8.4852814-8.4852813z" fill="#444444" fill-rule="evenodd"/>
     </svg>
