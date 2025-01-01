@@ -93,6 +93,15 @@ main{
     max-height: 7vh;
 }
 
+#task_name, #task_date{
+    font-family: "Merriweather", serif;
+    font-weight: 300;
+    font-style: normal;
+    padding: 1vh 2vw;
+    color: #444444;
+    border: 2px solid #444444;
+}
+
 footer{
     display: flex;
     margin-top: auto;
