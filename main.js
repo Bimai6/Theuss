@@ -11,6 +11,10 @@ taskAddContainer.addEventListener("click", (event) => {
   if (isInputView && target.closest("#task_canceled")) {
     handleBack();
   }
+
+  if (isInputView && target.closest("#task_confirmed")) {
+    confirmTask();
+  }
 });
 
 function handleClick() {
@@ -20,7 +24,7 @@ function handleClick() {
   taskAddContainer.innerHTML = `
     <input type="text" name="task_name" id="task_name" placeholder="Buy a carrot" required>
     <input type="date" name="task_date" id="task_date" required>
-    <svg id="task_confirmed" width="37px" height="37px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <svg id="task_confirmed" width="40px" height="40px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
       <path d="m16 0c8.836556 0 16 7.163444 16 16s-7.163444 16-16 16-16-7.163444-16-16 7.163444-16 16-16zm5.7279221 11-7.0710679 7.0710678-4.2426406-4.2426407-1.4142136 1.4142136 5.6568542 5.6568542 8.4852814-8.4852813z" fill="#444444" fill-rule="evenodd"/>
     </svg>
     <svg id="task_canceled" width="50px" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,4 +52,24 @@ function handleBack() {
   taskAddContainer.classList.remove("no-hover");
 
   isInputView = false;
+}
+
+function confirmTask() {
+  const textInput= document.getElementById("task_name");
+  const dateInput= document.getElementById("task_date");
+  const taskList= document.getElementById("task_list");
+  let text= textInput.value
+  let dateBadFormat= dateInput.value;
+  let dateValues =dateBadFormat.split("-");
+  let date= dateValues[2] + "-" + dateValues[1] + "-" + dateValues[0];
+
+  if (text != "" && date != "") {
+  taskList.innerHTML+= `<li> <svg class="unmarked_cb" xmlns="http://www.w3.org/2000/svg" width="164.5" height="157.562" viewBox="0 0 164.562 157.562">
+        <path id="cb_square" data-name="Rectángulo 2" fill="none" stroke="#444444" stroke-width="10.583" fill-rule="evenodd" 
+          d="M123,126H277V273H123V126Z" transform="translate(-300.719 -120.719)"/>
+      </svg> <div class="task_separator"> <span>${text}</span> <span>|</span> <span>${date} </span> </div>
+  </li>`
+  }
+
+  handleBack();
 }

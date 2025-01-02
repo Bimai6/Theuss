@@ -13,6 +13,7 @@ body{
     color: #444444;
     overflow-x: hidden;
     justify-content: space-between;
+    align-items: center;
 }
 
 header{
@@ -22,9 +23,10 @@ header{
     gap: 1.5rem;
     position: fixed;
     justify-content: space-between;
+    border-bottom: 0.2rem solid #444444;
 }
 
-header svg{ 
+header svg, li svg{ 
     max-height: 5vh;
 }
 
@@ -37,14 +39,6 @@ header svg{
 
 #palette_icon:hover,#search_icon:hover{
     cursor: pointer;
-}
-
-.header_border_bottom_unfixed{
-    background-color: #444444;
-    width: 100%;
-    height: 0.2rem;
-    position: relative;
-    top: 10vh;
 }
 
 #theuss_cb{
@@ -64,6 +58,9 @@ main{
     margin-top: 15vh;
     width: 100%;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
 #add_new_task_input:hover,#task_confirmed:hover,#task_canceled:hover{
@@ -107,4 +104,37 @@ footer{
     margin-top: auto;
     justify-content: center;
     font-size: 14px;
+    align-items: center;
+}
+
+#task_list{
+    display: flex;
+    width: calc(75% - 1.5rem);
+    justify-content: center;
+    margin-right: 2.9vw;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+li{
+    display: flex;
+    border: 2px solid #444444;
+    padding: 2px;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    font-size: 25px;
+    min-height: 8vh;
+}
+.unmarked_cb{
+    z-index: 10;
+}
+
+.task_separator{
+    display: flex;
+    flex-direction: row;
+    z-index: 100;
+    gap: 2rem;
+    transform: translateX(-4rem);
+    font-size: 16px;
 }
