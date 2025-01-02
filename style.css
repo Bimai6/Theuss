@@ -6,8 +6,8 @@ body{
     flex-direction: column;
     height: 100vh;
     box-sizing: border-box;
-    flex-wrap: wrap;
-    font-family: "Merriweather", serif;
+    flex-wrap: wrap; 
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 300;
     font-style: normal;
     color: #444444;
@@ -24,6 +24,8 @@ header{
     position: fixed;
     justify-content: space-between;
     border-bottom: 0.2rem solid #444444;
+    background-color: #ffffff;
+    z-index: 999999;
 }
 
 header svg, li svg{ 
@@ -91,9 +93,10 @@ main{
 }
 
 #task_name, #task_date{
-    font-family: "Merriweather", serif;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 300;
     font-style: normal;
+    font-size: 18px;
     padding: 1vh 2vw 1vh 0;
     color: #444444;
     border: 2px solid #444444;
@@ -123,7 +126,7 @@ li{
     width: 100%;
     flex-direction: row;
     align-items: center;
-    font-size: 25px;
+    font-size: 22px;
     min-height: 8vh;
 }
 .unmarked_cb{
@@ -133,8 +136,32 @@ li{
 .task_separator{
     display: flex;
     flex-direction: row;
+    align-items: end;
     z-index: 100;
     gap: 2rem;
     transform: translateX(-4rem);
-    font-size: 16px;
+}
+
+.task_input_separator{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    gap: 2rem;
+    margin-left: auto;
+    margin-right: 0.75rem;
+}
+
+.task_edit{
+    max-height: 6vh;
+}
+
+.task_delete{
+    max-height: 5.25vh;
+}
+
+.date_selected{
+    border-left: 2px solid #444444;
+    padding-left: 1.75vw;
 }
