@@ -1,4 +1,15 @@
 const taskAddContainer = document.getElementById("add_new_task_input");
+const adviceOptions= ["deleting this task"];
+
+
+function createAdviceWindow(selectedAdvice) {
+  const adviceWindow = `<div class="window_content">
+<p> Are you sure about ${selectedAdvice} ? </p>
+<button id="confirm_whatever">Yes</button>
+<button id="cancel_whatever">No</button>
+<div>`;
+  return adviceWindow;
+}
 
 let isInputView = false; 
 
@@ -107,3 +118,26 @@ function confirmTask() {
   handleBack();
   }
 }
+
+document.addEventListener('click', function (event){
+  if(event.target.classList.contains('task_delete')){
+    const parent = event.target.closest('li');
+    if(parent){
+      const selectedAdvice = adviceOptions[0];
+      const confirmDeleteWindow= document.createElement('div');
+      confirmDeleteWindow.id = 'window_node';
+      confirmDeleteWindow.classList.add('node');
+      confirmDeleteWindow.innerHTML = createAdviceWindow(selectedAdvice);
+      document.body.appendChild(confirmDeleteWindow);
+
+      document.addEventListener('click', function (event) {
+        if (event.target.id =='confirm_whatever') {
+          confirmDeleteWindow.remove();
+          parent.remove();
+        }else if (event.target.id == 'cancel_whatever') {
+          confirmDeleteWindow.remove();
+        }
+      })
+    }
+  }
+});
