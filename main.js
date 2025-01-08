@@ -7,8 +7,36 @@ function createAdviceWindow(selectedAdvice) {
 <p> Are you sure about ${selectedAdvice} ? </p>
 <button id="confirm_whatever">Yes</button>
 <button id="cancel_whatever">No</button>
-<div>`;
+</div>`;
   return adviceWindow;
+}
+
+function createEditWindow(previousName) {
+  const editWindow = `<div class="window_content_edit">
+    <div class="window_edit_title">
+    <p> Rewrite your task: </p>
+    </div>
+    <div class="window_edit_inputs">
+    <input type="text" name="task_name" id="task_name" placeholder="${previousName}" maxLength="50" required>
+    <input type="date" name="task_date" id="task_date" required>
+    <svg id="task_edit_confirmed" width="62px" height="62px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_fluent_checkbox_checked_24_filled</title>
+    <desc>Created with Sketch.</desc>
+    <g id="🔍-Product-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ic_fluent_checkbox_checked_24_filled" fill="#444444" fill-rule="nonzero">
+            <path d="M18,3 C19.6568542,3 21,4.34314575 21,6 L21,18 C21,19.6568542 19.6568542,21 18,21 L6,21 C4.34314575,21 3,19.6568542 3,18 L3,6 C3,4.34314575 4.34314575,3 6,3 L18,3 Z M16.4696699,7.96966991 L10,14.4393398 L7.53033009,11.9696699 C7.23743687,11.6767767 6.76256313,11.6767767 6.46966991,11.9696699 C6.1767767,12.2625631 6.1767767,12.7374369 6.46966991,13.0303301 L9.46966991,16.0303301 C9.76256313,16.3232233 10.2374369,16.3232233 10.5303301,16.0303301 L17.5303301,9.03033009 C17.8232233,8.73743687 17.8232233,8.26256313 17.5303301,7.96966991 C17.2374369,7.6767767 16.7625631,7.6767767 16.4696699,7.96966991 Z" id="🎨-Color">
+
+</path>
+        </g>
+    </g>
+</svg>
+    <svg id="task_edit_canceled" width="50px" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM13.92 16.13H9C8.59 16.13 8.25 15.79 8.25 15.38C8.25 14.97 8.59 14.63 9 14.63H13.92C15.2 14.63 16.25 13.59 16.25 12.3C16.25 11.01 15.21 9.97 13.92 9.97H8.85L9.11 10.23C9.4 10.53 9.4 11 9.1 11.3C8.95 11.45 8.76 11.52 8.57 11.52C8.38 11.52 8.19 11.45 8.04 11.3L6.47 9.72C6.18 9.43 6.18 8.95 6.47 8.66L8.04 7.09C8.33 6.8 8.81 6.8 9.1 7.09C9.39 7.38 9.39 7.86 9.1 8.15L8.77 8.48H13.92C16.03 8.48 17.75 10.2 17.75 12.31C17.75 14.42 16.03 16.13 13.92 16.13Z" fill="#444444"/>
+    </svg>
+    </div>
+    </div>
+  `;
+  return editWindow;
 }
 
 let isInputView = false;
@@ -33,7 +61,7 @@ function handleClick() {
 
   taskAddContainer.classList.add("no-hover");
   taskAddContainer.innerHTML = `
-    <input type="text" name="task_name" id="task_name" placeholder="Buy a carrot" maxLength="71" required>
+    <input type="text" name="task_name" id="task_name" placeholder="Buy a carrot" maxLength="50" required>
     <input type="date" name="task_date" id="task_date" required>
     <svg id="task_confirmed" width="62px" height="62px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>ic_fluent_checkbox_checked_24_filled</title>
@@ -104,30 +132,46 @@ function confirmTask() {
       <div class="task_separator"> <span class="name_selected">${text}</span> <span class="date_selected"> ${date} </span> </div> 
       <div class="task_input_separator"> ${editTask} ${deleteTask} </div>
     </li>`;
-    
+
     handleBack();
 
-    const taskDeleteButtons = taskList.querySelectorAll(".task_delete");
-    
-    taskDeleteButtons.forEach(button => {
-      button.onclick = function(event) {
-        const parent = event.target.closest("li");
+    let taskNamesSpan= taskList.querySelectorAll(".name_selected");
+    let taskNames = Array.from(taskNamesSpan).map(task => task.textContent);
+    let taskEditButtons = taskList.querySelectorAll(".task_edit");
+    let taskDeleteButtons = taskList.querySelectorAll(".task_delete");
+
+    taskEditButtons.forEach((button, index) => {
+      button.onclick = function (event) {
+        let parent = event.target.closest("li");
         if (parent) {
-          const selectedAdvice = adviceOptions[0];
-          const confirmDeleteWindow = document.createElement("div");
+          let confirmEditWindow = document.createElement("div");
+          confirmEditWindow.id = "window_node";
+          confirmEditWindow.classList.add("node");
+          confirmEditWindow.innerHTML = createEditWindow(taskNames[index]);
+          document.body.appendChild(confirmEditWindow);
+        }
+      };
+    });
+
+    taskDeleteButtons.forEach((button) => {
+      button.onclick = function (event) {
+        let parent = event.target.closest("li");
+        if (parent) {
+          let selectedAdvice = adviceOptions[0];
+          let confirmDeleteWindow = document.createElement("div");
           confirmDeleteWindow.id = "window_node";
           confirmDeleteWindow.classList.add("node");
           confirmDeleteWindow.innerHTML = createAdviceWindow(selectedAdvice);
           document.body.appendChild(confirmDeleteWindow);
           let isWindowSet = true;
 
-          document.addEventListener("click", function(event) {
+          document.addEventListener("click", function (event) {
             if (event.target.id == "confirm_whatever" && isWindowSet) {
               confirmDeleteWindow.remove();
               parent.remove();
             } else if (event.target.id == "cancel_whatever" && isWindowSet) {
               confirmDeleteWindow.remove();
-              isWindowSet= false;
+              isWindowSet = false;
             }
           });
         }
