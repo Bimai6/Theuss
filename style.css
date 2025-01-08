@@ -7,7 +7,7 @@ body{
     height: 100vh;
     box-sizing: border-box;
     flex-wrap: wrap; 
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 300;
     font-style: normal;
     color: #444444;
@@ -44,12 +44,10 @@ header svg, li svg{
 }
 
 #theuss_cb{
-    position: relative;
     z-index: 10;
 }
 
-#theuss_logo{
-    position: relative;
+#theuss_logo{                    
     z-index: 100;
     transform: translateX(-41vw);
 }
@@ -83,7 +81,7 @@ main{
     justify-content: center;
     flex-direction: row;
     align-items: center;
-    font-size: 25px;
+    font-size: 2.25vw;
     gap: 1em;
     min-height: 14vh;
 }
@@ -96,7 +94,7 @@ main{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 300;
     font-style: normal;
-    font-size: 18px;
+    font-size: 1.25vw;
     padding: 1vh 2vw 1vh 0;
     color: #444444;
     border: 2px solid #444444;
@@ -106,7 +104,7 @@ footer{
     display: flex;
     margin-top: auto;
     justify-content: center;
-    font-size: 14px;
+    font-size: 1vw;
     align-items: center;
 }
 
@@ -126,7 +124,7 @@ li{
     width: 100%;
     flex-direction: row;
     align-items: center;
-    font-size: 22px;
+    font-size: 1.75vw;
     min-height: 8vh;
 }
 .unmarked_cb{
@@ -148,8 +146,8 @@ li{
     justify-content: center;
     align-items: center;
     position: relative;
-    gap: 2rem;
     margin-left: auto;
+    gap: 2rem;
     margin-right: 0.75rem;
 }
 
@@ -177,7 +175,7 @@ li{
   }
   
   .window_content {
-    font-size: 22px;
+    font-size: 1.25vw;
     position: absolute;
     top: 35vh;
     right: 35vw;
@@ -189,7 +187,7 @@ li{
   }
   
   .window_content button {
-    font-size: 18px;
+    font-size: 1vw;
     margin: 10px;
     padding: 10px 20px;
     border: none;
