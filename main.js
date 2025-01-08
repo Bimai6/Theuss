@@ -1,6 +1,6 @@
 const taskAddContainer = document.getElementById("add_new_task_input");
-const adviceOptions= ["deleting this task"];
-
+const adviceOptions = ["deleting this task"];
+const anyTaskCreated = false;
 
 function createAdviceWindow(selectedAdvice) {
   const adviceWindow = `<div class="window_content">
@@ -11,7 +11,7 @@ function createAdviceWindow(selectedAdvice) {
   return adviceWindow;
 }
 
-let isInputView = false; 
+let isInputView = false;
 
 taskAddContainer.addEventListener("click", (event) => {
   if (!isInputView) {
@@ -29,7 +29,7 @@ taskAddContainer.addEventListener("click", (event) => {
 });
 
 function handleClick() {
-  if (isInputView) return; 
+  if (isInputView) return;
 
   taskAddContainer.classList.add("no-hover");
   taskAddContainer.innerHTML = `
@@ -51,11 +51,11 @@ function handleClick() {
     </svg>
   `;
 
-  isInputView = true; 
+  isInputView = true;
 }
 
 function handleBack() {
-  if (!isInputView) return; 
+  if (!isInputView) return;
 
   taskAddContainer.innerHTML = `
     <svg version="1.1" id="add_btn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
@@ -74,70 +74,64 @@ function handleBack() {
 }
 
 function confirmTask() {
-  const textInput= document.getElementById("task_name");
-  const dateInput= document.getElementById("task_date");
-  const taskList= document.getElementById("task_list");
-  const checkboxUnmarked= `<svg class="unmarked_cb" xmlns="http://www.w3.org/2000/svg" width="164.5" height="157.562" viewBox="0 0 164.562 157.562">
-  <path id="cb_square" data-name="Rectángulo 2" fill="none" stroke="#444444" stroke-width="10.583" fill-rule="evenodd" 
-    d="M123,126H277V273H123V126Z" transform="translate(-300.719 -120.719)"/>
-</svg>`;
-  const editTask= `<svg class="task_edit" width="50px" height="50px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-
-<g fill="none" fill-rule="evenodd">
-
-<path d="m0 0h32v32h-32z"/>
-
-<path d="m24 2c3.3137085 0 6 2.6862915 6 6v16c0 3.3137085-2.6862915 6-6 6h-16c-3.3137085 0-6-2.6862915-6-6v-16c0-3.3137085 2.6862915-6 6-6zm-.3436508 6.42893219c-.7810486-.78104859-2.0473786-.78104859-2.8284271 0l-8.6888868 8.68888671c-.2761731.2761732-.5104094.5913054-.6952518.9353643l-2.03239132 3.78302c-.09385337.1746953-.09532506.3844806-.00393188.5604754.15271557.2940827.51491707.4086833.8089997.2559678l3.5680876-1.8528891c.4541422-.2358337.8693897-.5399861 1.231234-.9018304l8.6405676-8.6405676c.7810486-.7810486.7810486-2.04737853 0-2.82842711z" fill="#444444"/>
-
-</g>
-
-</svg>`;
-  const deleteTask= `<svg class="task_delete" width="50px" height="50px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-    
-    <title>cross-square</title>
-    <desc>Created with Sketch Beta.</desc>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="Icon-Set-Filled" sketch:type="MSLayerGroup" transform="translate(-206.000000, -1037.000000)" fill="#444444">
-            <path d="M226.95,1056.54 C227.34,1056.93 227.34,1057.56 226.95,1057.95 C226.559,1058.34 225.926,1058.34 225.536,1057.95 L222,1054.41 L218.464,1057.95 C218.074,1058.34 217.441,1058.34 217.05,1057.95 C216.66,1057.56 216.66,1056.93 217.05,1056.54 L220.586,1053 L217.05,1049.46 C216.66,1049.07 216.66,1048.44 217.05,1048.05 C217.441,1047.66 218.074,1047.66 218.464,1048.05 L222,1051.59 L225.536,1048.05 C225.926,1047.66 226.559,1047.66 226.95,1048.05 C227.34,1048.44 227.34,1049.07 226.95,1049.46 L223.414,1053 L226.95,1056.54 L226.95,1056.54 Z M234,1037 L210,1037 C207.791,1037 206,1038.79 206,1041 L206,1065 C206,1067.21 207.791,1069 210,1069 L234,1069 C236.209,1069 238,1067.21 238,1065 L238,1041 C238,1038.79 236.209,1037 234,1037 L234,1037 Z" id="cross-square" sketch:type="MSShapeGroup">
-
-</path>
-        </g>
+  const textInput = document.getElementById("task_name");
+  const dateInput = document.getElementById("task_date");
+  const taskList = document.getElementById("task_list");
+  const checkboxUnmarked = `<svg class="unmarked_cb" xmlns="http://www.w3.org/2000/svg" width="164.5" height="157.562" viewBox="0 0 164.562 157.562">
+    <path id="cb_square" data-name="Rectángulo 2" fill="none" stroke="#444444" stroke-width="10.583" fill-rule="evenodd" 
+      d="M123,126H277V273H123V126Z" transform="translate(-300.719 -120.719)"/>
+  </svg>`;
+  const editTask = `<svg class="task_edit" width="50px" height="50px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" fill-rule="evenodd">
+      <path d="m0 0h32v32h-32z"/>
+      <path d="m24 2c3.3137085 0 6 2.6862915 6 6v16c0 3.3137085-2.6862915 6-6 6h-16c-3.3137085 0-6-2.6862915-6-6v-16c0-3.3137085 2.6862915-6 6-6zm-.3436508 6.42893219c-.7810486-.78104859-2.0473786-.78104859-2.8284271 0l-8.6888868 8.68888671c-.2761731.2761732-.5104094.5913054-.6952518.9353643l-2.03239132 3.78302c-.09385337.1746953-.09532506.3844806-.00393188.5604754.15271557.2940827.51491707.4086833.8089997.2559678l3.5680876-1.8528891c.4541422-.2358337.8693897-.5399861 1.231234-.9018304l8.6405676-8.6405676c.7810486-.7810486.7810486-2.04737853 0-2.82842711z" fill="#444444"/>
     </g>
-</svg>`;
-  let text= textInput.value;
-  let dateBadFormat= dateInput.value;
-  let dateValues =dateBadFormat.split("-");
-  let date= dateValues[2] + "-" + dateValues[1] + "-" + dateValues[0];
+  </svg>`;
+  const deleteTask = `<svg class="task_delete" width="50px" height="50px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>cross-square</title>
+    <g id="Icon-Set-Filled" transform="translate(-206.000000, -1037.000000)" fill="#444444">
+      <path d="M226.95,1056.54 C227.34,1056.93 227.34,1057.56 226.95,1057.95 C226.559,1058.34 225.926,1058.34 225.536,1057.95 L222,1054.41 L218.464,1057.95 C218.074,1058.34 217.441,1058.34 217.05,1057.95 C216.66,1057.56 216.66,1056.93 217.05,1056.54 L220.586,1053 L217.05,1049.46 C216.66,1049.07 216.66,1048.44 217.05,1048.05 C217.441,1047.66 218.074,1047.66 218.464,1048.05 L222,1051.59 L225.536,1048.05 C225.926,1047.66 226.559,1047.66 226.95,1048.05 C227.34,1048.44 227.34,1049.07 226.95,1049.46 L223.414,1053 L226.95,1056.54 Z M234,1037 L210,1037 C207.791,1037 206,1038.79 206,1041 L206,1065 C206,1067.21 207.791,1069 210,1069 L234,1069 C236.209,1069 238,1067.21 238,1065 L238,1041 C238,1038.79 236.209,1037 234,1037 L234,1037 Z" id="cross-square"/>
+    </g>
+  </svg>`;
 
-  if (text != "" && date.length=== 10) {
-  taskList.innerHTML+= `<li> ${checkboxUnmarked} 
+  let text = textInput.value;
+  let dateBadFormat = dateInput.value;
+  let dateValues = dateBadFormat.split("-");
+  let date = dateValues[2] + "-" + dateValues[1] + "-" + dateValues[0];
+
+  if (text != "" && date.length === 10) {
+    taskList.innerHTML += `<li> ${checkboxUnmarked} 
       <div class="task_separator"> <span class="name_selected">${text}</span> <span class="date_selected"> ${date} </span> </div> 
       <div class="task_input_separator"> ${editTask} ${deleteTask} </div>
-  </li>`
+    </li>`;
+    
+    handleBack();
 
-  handleBack();
+    const taskDeleteButtons = taskList.querySelectorAll(".task_delete");
+    
+    taskDeleteButtons.forEach(button => {
+      button.onclick = function(event) {
+        const parent = event.target.closest("li");
+        if (parent) {
+          const selectedAdvice = adviceOptions[0];
+          const confirmDeleteWindow = document.createElement("div");
+          confirmDeleteWindow.id = "window_node";
+          confirmDeleteWindow.classList.add("node");
+          confirmDeleteWindow.innerHTML = createAdviceWindow(selectedAdvice);
+          document.body.appendChild(confirmDeleteWindow);
+          let isWindowSet = true;
+
+          document.addEventListener("click", function(event) {
+            if (event.target.id == "confirm_whatever" && isWindowSet) {
+              confirmDeleteWindow.remove();
+              parent.remove();
+            } else if (event.target.id == "cancel_whatever" && isWindowSet) {
+              confirmDeleteWindow.remove();
+              isWindowSet= false;
+            }
+          });
+        }
+      };
+    });
   }
 }
-
-document.addEventListener('click', function (event){
-  if(event.target.classList.contains('task_delete')){
-    const parent = event.target.closest('li');
-    if(parent){
-      const selectedAdvice = adviceOptions[0];
-      const confirmDeleteWindow= document.createElement('div');
-      confirmDeleteWindow.id = 'window_node';
-      confirmDeleteWindow.classList.add('node');
-      confirmDeleteWindow.innerHTML = createAdviceWindow(selectedAdvice);
-      document.body.appendChild(confirmDeleteWindow);
-
-      document.addEventListener('click', function (event) {
-        if (event.target.id =='confirm_whatever') {
-          confirmDeleteWindow.remove();
-          parent.remove();
-        }else if (event.target.id == 'cancel_whatever') {
-          confirmDeleteWindow.remove();
-        }
-      })
-    }
-  }
-});
