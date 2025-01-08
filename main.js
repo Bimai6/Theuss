@@ -14,7 +14,7 @@ function createAdviceWindow(selectedAdvice) {
 function createEditWindow(previousName) {
   const editWindow = `<div class="window_content_edit">
     <div class="window_edit_title">
-    <p> Rewrite your task: </p>
+    <p> Rewrite your task named "${previousName}": </p>
     </div>
     <div class="window_edit_inputs">
     <input type="text" name="task_name" id="task_name" placeholder="${previousName}" maxLength="50" required>
