@@ -1,6 +1,5 @@
 const taskAddContainer = document.getElementById("add_new_task_input");
 const adviceOptions = ["deleting this task"];
-const anyTaskCreated = false;
 
 function createAdviceWindow(selectedAdvice) {
   const adviceWindow = `<div class="window_content">
@@ -135,8 +134,9 @@ function confirmTask() {
 
     handleBack();
 
-    let taskNamesSpan= taskList.querySelectorAll(".name_selected");
-    let taskNames = Array.from(taskNamesSpan).map(task => task.textContent);
+    let taskNamesSpan = taskList.querySelectorAll(".name_selected");
+    let taskNames = Array.from(taskNamesSpan).map((task) => task.textContent);
+    let taskDates = taskList.querySelectorAll(".date_selected");
     let taskEditButtons = taskList.querySelectorAll(".task_edit");
     let taskDeleteButtons = taskList.querySelectorAll(".task_delete");
 
@@ -149,6 +149,52 @@ function confirmTask() {
           confirmEditWindow.classList.add("node");
           confirmEditWindow.innerHTML = createEditWindow(taskNames[index]);
           document.body.appendChild(confirmEditWindow);
+
+          let isWindowSet = true;
+          let newTaskName = confirmEditWindow.querySelector("#task_name");
+          let newTaskDate = confirmEditWindow.querySelector("#task_date");
+          let rewriteBtn = confirmEditWindow.querySelector(
+            "#task_edit_confirmed"
+          );
+          let backBtn = confirmEditWindow.querySelector("#task_edit_canceled");
+
+          rewriteBtn.onclick = function () {
+            let newTaskDateValue = newTaskDate.value;
+
+            if (newTaskDateValue) {
+              let newDateValues = newTaskDateValue.split("-");
+              let dateFixed =
+                newDateValues[2] +
+                "-" +
+                newDateValues[1] +
+                "-" +
+                newDateValues[0];
+              if (newTaskName.value == "" && newTaskDateValue.length === 10) {
+                changeTaskParams(
+                  taskNamesSpan[index],
+                  taskDates[index],
+                  taskNames[index],
+                  dateFixed
+                );
+                confirmEditWindow.remove();
+                isWindowSet = false;
+              } else if (newTaskDateValue.length === 10) {
+                changeTaskParams(
+                  taskNamesSpan[index],
+                  taskDates[index],
+                  newTaskName.value,
+                  dateFixed
+                );
+                confirmEditWindow.remove();
+                isWindowSet = false;
+              }
+            }
+          };
+
+          backBtn.onclick = function () {
+            confirmEditWindow.remove();
+            isWindowSet = false;
+          };
         }
       };
     });
@@ -178,4 +224,9 @@ function confirmTask() {
       };
     });
   }
+}
+
+function changeTaskParams(oldTitle, oldDate, newTitleValue, newDateValue) {
+  oldTitle.innerHTML = newTitleValue;
+  oldDate.innerHTML = newDateValue;
 }
