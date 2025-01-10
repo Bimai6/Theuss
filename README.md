@@ -40,15 +40,7 @@ To run Theuss locally, follow these steps:
   ```bash
   cd theuss
   ```
-3. Install dependencies:
-  ```bash
-  npm install
-  ```
-4. Run the app:
-  ```bash
-  npm start
-  ```
-5. Now you can use Theuss locally in your browser at http://localhost:3000 !
+3. Open index.html in your preferred browser to launch the application
 
 ## Contributing 🤝
 If you would like to contribute to Theuss, feel free to fork the repository, create a new branch, and submit a pull request. All contributions are welcome!
