@@ -12,7 +12,6 @@ body{
     font-style: normal;
     color: #444444;
     overflow-x: hidden;
-    justify-content: space-between;
     align-items: center;
 }
 
@@ -36,12 +35,14 @@ header svg, li svg{
     display: flex;
     justify-content: space-around;
     position: relative;
+    margin-left: 1em;
 }
 
 .header_right_options{
     display: flex;
     gap: 1.5rem;
     z-index: 400;
+    margin-right: 1em;
 }
 
 .search_container{
@@ -50,25 +51,26 @@ header svg, li svg{
 
 #search_tool{
     border: 2px solid #444444;
+    padding-left: 2rem;
 }
 
 #search_icon{
     position: absolute;
 }
 
-#palette_icon:hover{
+#palette_icon:hover, #theuss_cb:hover{
     cursor: pointer;
 }
 
 #theuss_cb{
     overflow: hidden;
-    z-index: 10;
+    z-index: 100;
 }
 
 #theuss_logo{
     overflow: hidden;   
     position: absolute;              
-    z-index: 100;
+    z-index: 10;
     transform: translateX(4rem);
 }
 
@@ -121,14 +123,6 @@ main{
     padding: 1vh 2vw 1vh 0;
     color: #444444;
     border: 2px solid #444444;
-}
-
-footer{
-    display: flex;
-    margin-top: auto;
-    justify-content: center;
-    font-size: 1vw;
-    align-items: center;
 }
 
 #task_list{
@@ -242,4 +236,18 @@ li{
     cursor: pointer;
     background-color: #444444;
     color: #ffffff;
+  }
+
+  .task-completed-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #444444;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+    z-index: 1000;
   }

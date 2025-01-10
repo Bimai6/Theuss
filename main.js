@@ -1,5 +1,6 @@
 const taskAddContainer = document.getElementById("add_new_task_input");
 const adviceOptions = ["deleting this task"];
+const searchTool = document.getElementById('search_tool');
 
 function createAdviceWindow(selectedAdvice) {
   const adviceWindow = `<div class="window_content">
@@ -127,12 +128,16 @@ function confirmTask() {
   let date = dateValues[2] + "-" + dateValues[1] + "-" + dateValues[0];
 
   if (text != "" && date.length === 10) {
-    taskList.innerHTML += `<li> ${checkboxUnmarked} 
+    const newTask = document.createElement('li');
+    newTask.innerHTML = `${checkboxUnmarked} 
       <div class="task_separator"> <span class="name_selected">${text}</span> <span class="date_selected"> ${date} </span> </div> 
       <div class="task_input_separator"> ${editTask} ${deleteTask} </div>
-    </li>`;
+    `;
+    taskList.appendChild(newTask);
 
     handleBack();
+
+    addCheckboxEventListeners();
 
     let taskNamesSpan = taskList.querySelectorAll(".name_selected");
     let taskNames = Array.from(taskNamesSpan).map((task) => task.textContent);
@@ -195,6 +200,7 @@ function confirmTask() {
             confirmEditWindow.remove();
             isWindowSet = false;
           };
+
         }
       };
     });
@@ -230,3 +236,97 @@ function changeTaskParams(oldTitle, oldDate, newTitleValue, newDateValue) {
   oldTitle.innerHTML = newTitleValue;
   oldDate.innerHTML = newDateValue;
 }
+
+function filterTasks() {
+  const searchTerm = searchTool.value.toLowerCase();
+  const tasks = document.querySelectorAll('#task_list li');  
+  
+  tasks.forEach(task => {
+    const taskName = task.querySelector('.name_selected').textContent.toLowerCase();
+    if (taskName.includes(searchTerm)) {
+      task.style.display = '';  
+    } else {
+      task.style.display = 'none';  
+    }
+  });
+}
+
+function handleTaskCheckboxClick(event) {
+  const checkbox = event.target.closest('.unmarked_cb');
+  if (checkbox) {
+    const taskItem = checkbox.closest('li');
+    const taskName = taskItem.querySelector('.name_selected');
+    const taskDate = taskItem.querySelector('.date_selected');
+
+    if (checkbox.style.backgroundImage) {
+      checkbox.style.backgroundImage = '';
+      taskName.style.textDecoration = '';
+      taskDate.style.textDecoration = '';
+      taskItem.style.display = '';
+    } else {
+      checkbox.style.backgroundImage = 'url("./images/check-svgrepo-com.svg")';
+      checkbox.style.backgroundSize = 'contain';
+      checkbox.style.backgroundRepeat = 'no-repeat';
+      taskName.style.textDecoration = 'line-through';
+      taskDate.style.textDecoration = 'line-through';
+
+      const message = document.createElement('div');
+      message.className = 'task-completed-message';
+      message.innerText = 'Task completed! Mark Theuss to see it!';
+      document.body.appendChild(message);
+
+      setTimeout(() => {
+        message.remove();
+      }, 3000);
+
+      const theussCheckbox = document.getElementById('theuss_cb');
+      if (!theussCheckbox.style.backgroundImage) {
+        taskItem.style.display = 'none';
+      }
+    }
+  }
+}
+
+function handleTheussCheckboxClick(event) {
+  const checkbox = event.target.closest('#theuss_cb');
+  if (checkbox) {
+    const tasks = document.querySelectorAll('#task_list li');
+    if (checkbox.style.backgroundImage) {
+      checkbox.style.backgroundImage = '';
+      tasks.forEach(task => {
+        const taskCheckbox = task.querySelector('.unmarked_cb');
+        if (taskCheckbox && taskCheckbox.style.backgroundImage) {
+          task.style.display = 'none';
+        }
+      });
+    } else {
+      checkbox.style.backgroundImage = 'url("./images/check-svgrepo-com.svg")';
+      checkbox.style.backgroundSize = 'contain';
+      checkbox.style.backgroundRepeat = 'no-repeat';
+      tasks.forEach(task => {
+        const taskCheckbox = task.querySelector('.unmarked_cb');
+        if (taskCheckbox && taskCheckbox.style.backgroundImage) {
+          task.style.display = '';
+        }
+      });
+    }
+  }
+}
+
+function addCheckboxEventListeners() {
+  const unmarkedCheckboxes = document.querySelectorAll('.unmarked_cb');
+  unmarkedCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('click', handleTaskCheckboxClick);
+  });
+
+  const theussCheckbox = document.getElementById('theuss_cb');
+  if (theussCheckbox) {
+    theussCheckbox.addEventListener('click', handleTheussCheckboxClick);
+  }
+}
+
+searchTool.addEventListener('input', filterTasks);
+
+document.addEventListener('DOMContentLoaded', () => {
+  addCheckboxEventListeners();
+});
