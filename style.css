@@ -32,24 +32,44 @@ header svg, li svg{
     max-height: 5vh;
 }
 
+.header_left_options{
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+}
+
 .header_right_options{
     display: flex;
     gap: 1.5rem;
-    margin-right: 2.5em;
-    
+    z-index: 400;
 }
 
-#palette_icon:hover,#search_icon:hover{
+.search_container{
+    display: flex;
+}
+
+#search_tool{
+    border: 2px solid #444444;
+}
+
+#search_icon{
+    position: absolute;
+}
+
+#palette_icon:hover{
     cursor: pointer;
 }
 
 #theuss_cb{
+    overflow: hidden;
     z-index: 10;
 }
 
-#theuss_logo{                    
+#theuss_logo{
+    overflow: hidden;   
+    position: absolute;              
     z-index: 100;
-    transform: translateX(-41vw);
+    transform: translateX(4rem);
 }
 
 main{
