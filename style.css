@@ -251,3 +251,53 @@ li{
     font-size: 16px;
     z-index: 1000;
   }
+
+  /* Puntos de quiebre para tablet */
+@media (max-width: 1023px) and (min-width: 768px) {
+   
+    .header_left_options, .header_right_options {
+        margin-left: 0;
+        justify-content: center;
+    }
+
+    .search_container input {
+        width: 100%;
+    }
+
+    li{
+        font-size: 2vw;
+    }
+
+    #add_new_task_input{
+        font-size: 2.5vw;
+    }
+
+    #add_new_task_input input{
+        font-size: 1.75vw;
+    }   
+}
+
+/* Puntos de quiebre para mobile */
+@media (max-width: 767px) {
+
+    .header_left_options, .header_right_options {
+        margin-left: 0;
+        justify-content: center;
+    }
+
+    .search_container input {
+        width: 100%;
+    }
+
+    li{
+        font-size: 3vw;
+    }
+
+    #add_new_task_input{
+        font-size: 3.5vw;
+    }
+
+    #add_new_task_input input{
+        font-size: 1.8vw;
+    }
+}
